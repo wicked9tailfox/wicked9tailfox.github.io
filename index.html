@@ -17,11 +17,13 @@
   <title>Document</title>
   <style>
 	body{position:relative;}
+	box{position:fixed;width:100%;height:100%;}
 	#one{position:fixed;top:0;}
   </style>
 </head>
 <body>
-<div id="one">222222</div>
+<div id="box">
+	<div id="one">222222</div>
  <div style="height:2000px;background:#eee;">
  	<ul>
  				<li>1</li>
@@ -36,12 +38,6 @@
  				<li>10</li>
  			</ul>		
  </div>
- <script>
- var one=document.getElementById('one');
-   window.ontouchmove=function(e){
-       e.preventDefault();
-       one.innerHTML=Math.random();
-   }
- </script>
+</div>	
 </body>
 </html>
