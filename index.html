@@ -21,17 +21,13 @@
   </style>
 </head>
 <body>
-<div id="one"></div>
+<div id="one">222222</div>
  <div style="height:2000px;background:#eee;"></div>
  <script>
  var one=document.getElementById('one');
- window.onscroll=function(e){
- 	 e.preventDefault();
- 	 one.innerHTML=Math.random();
- }
    window.ontouchmove=function(e){
-   	   console.log(1);
        e.preventDefault();
+       one.innerHTML=Math.random();
    }
  </script>
 </body>
