@@ -15,11 +15,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
   <title>Document</title>
+  <style>
+	body{position:relative;}
+	#one{position:fixed;top:0;}
+  </style>
 </head>
 <body>
+<div id="one"></div>
  <div style="height:2000px;background:#eee;"></div>
  <script>
-   Document.ontouchmove=function(e){
+ var one=document.getElementById('one');
+ window.onscroll=function(e){
+ 	 e.preventDefault();
+ 	 one.innerHTML=Math.random();
+ }
+   window.ontouchmove=function(e){
+   	   console.log(1);
        e.preventDefault();
    }
  </script>
