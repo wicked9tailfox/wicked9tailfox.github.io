@@ -1,0 +1,12 @@
+---
+layout: page
+title: book
+permalink: /book/
+---
+  <ul class="post-list">
+    {% for page in site.pages %}
+      <li>
+        {{page.title}}
+      </li>
+    {% endfor %}
+  </ul>
