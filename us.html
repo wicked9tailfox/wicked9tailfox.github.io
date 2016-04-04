@@ -1,0 +1,96 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<title>前端资源</title>
+<link rel="stylesheet" data-r href="resource.css">	
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<style>
+	*{margin:0;padding: 0}
+/* 清除浮动 */
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+    overflow:hidden;
+}
+.clearfix {
+    zoom:1; /* for ie6 & ie7 */
+}
+.clear {
+    clear:both;
+    display:block;
+    font-size:0;
+    height:0;
+    line-height:0;
+    overflow:hidden;
+}
+.tit{
+	padding: 0 10px;
+    line-height: 2;
+    color: #03A9F4;
+    text-align: center;
+    font-size: 18px;
+    font-weight: normal;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border: 1px solid #DFDFDF;
+}
+.main-container{padding:10px;}
+
+.catContainer{
+	background: #F5F5F5;
+    line-height: 2;
+    margin-bottom: 20px;
+}
+
+.catContainer li{
+	float: left;
+    width: 50%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 40px;
+    border: 1px solid #DFDFDF;
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+}
+.catContainer li a{display:block;text-decoration: none;line-height: 40px;}
+.catContainer li a span,.catContainer li a b{
+	display: inline-block;
+    padding: 0 10px;
+    box-sizing: border-box;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.catContainer li a span{
+	width: 30%;
+    font-weight: bold;
+    font-size: 14px;
+    color: #28BAFF;
+    background: #eee;
+    border-right: 1px solid #DFDFDF;
+    text-align: center;
+}
+
+.catContainer li a b{
+	width: 70%;
+    color: #A3A1A1;
+    font-weight: normal;
+}
+</style>
+</head>
+<body>
+<script src="js/resourceLoader.js" data-r></script>
+<script src="js/data.js" data-r></script>
+</body>
+</html>
