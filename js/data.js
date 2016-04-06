@@ -13,6 +13,11 @@ resLoader.createCat('资料图书')
 .addItem('gitbook','https://www.gitbook.com','很多大牛存在，文章和总结')
 .addItem('Leo Hui的gitbook','https://www.gitbook.com/@leohxj','程序员的自我养成;前端工程师手册;学好node开发;Git学习与使用')
 ;
+
+resLoader.createCat('前端学习网站')
+.addItem('伯乐在线','http://web.jobbole.com/',' WEB前端')
+;
+
 resLoader.render();
 
 
