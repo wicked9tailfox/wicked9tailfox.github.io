@@ -3,6 +3,7 @@ resLoader.createCat('工具')
 .addItem('tinypng.com','https://tinypng.com/','图片压缩,png压缩')
 .addItem('在线工具','http://tool.lu/','在线工具')
 .addItem('mindmeister','https://www.mindmeister.com/zh','传说中最好的在线思维导图工具')
+.addItem('icomoon','https://icomoon.io/','ico图标，ico font，svg图标')
 ;
 
 resLoader.createCat('CDN')
