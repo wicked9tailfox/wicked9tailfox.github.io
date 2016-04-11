@@ -23,7 +23,8 @@ resLoader.createCat('前端学习网站')
 ;
 
 resLoader.createCat('UED大集合')
-.addItem('alloyteam','hhttp://www.alloyteam.com/',' 腾讯全端 AlloyTeam 团队 Blog')
+.addItem('alloyteam','http://www.alloyteam.com/',' 腾讯全端 AlloyTeam 团队 Blog')
+.addItem('taobaoFED','http://taobaofed.org/',' 淘宝前端团队')
 ;
 
 resLoader.render();
