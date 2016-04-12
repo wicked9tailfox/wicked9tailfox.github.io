@@ -26,6 +26,9 @@ resLoader.createCat('UED大集合')
 .addItem('alloyteam','http://www.alloyteam.com/',' 腾讯全端 AlloyTeam 团队 Blog')
 .addItem('taobaoFED','http://taobaofed.org/',' 淘宝前端团队')
 ;
+resLoader.createCat('git')
+.addItem('猴子都能懂git','http://backlogtool.com/','浅显易懂的git入门')
+
 
 resLoader.render();
 
