@@ -20,6 +20,7 @@ resLoader.createCat('前端学习网站')
 .addItem('伯乐在线','http://web.jobbole.com/',' WEB前端')
 .addItem('div.io','http://div.io/#/welcome',' 高质量前端资源汇聚')
 .addItem('起舞周刊','http://old.75team.com/',' 前端周刊')
+.addItem('好多视频','http://haoduoshipin.com/all',' 很多优质的前端视频')
 ;
 
 resLoader.createCat('UED大集合')
