@@ -22,6 +22,7 @@ resLoader.createCat('前端学习网站')
 .addItem('div.io','http://div.io/#/welcome',' 高质量前端资源汇聚')
 .addItem('起舞周刊','http://old.75team.com/',' 前端周刊')
 .addItem('好多视频','http://haoduoshipin.com/all',' 很多优质的前端视频')
+.addItem('ES6入门','http://es6.ruanyifeng.com/',' 阮一峰ES6知识讲解')
 ;
 
 resLoader.createCat('UED大集合')
