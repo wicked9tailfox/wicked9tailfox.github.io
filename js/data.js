@@ -23,6 +23,8 @@ resLoader.createCat('前端学习网站')
 .addItem('起舞周刊','http://old.75team.com/',' 前端周刊')
 .addItem('好多视频','http://haoduoshipin.com/all',' 很多优质的前端视频')
 .addItem('ES6入门','http://es6.ruanyifeng.com/',' 阮一峰ES6知识讲解')
+.addItem('ES6新功能','http://es6-features.org/#Constants','ECMAScript 6: New Features: Overview and Comparison')
+
 ;
 
 resLoader.createCat('UED大集合')
