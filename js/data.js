@@ -14,6 +14,7 @@ resLoader.createCat('CDN')
 resLoader.createCat('资料图书')
 .addItem('gitbook','https://www.gitbook.com','很多大牛存在，文章和总结')
 .addItem('Leo Hui的gitbook','https://www.gitbook.com/@leohxj','程序员的自我养成;前端工程师手册;学好node开发;Git学习与使用')
+.addItem('免费中文编程书资源','https://github.com/justjavac/free-programming-books-zh_CN','免费的编程中文书籍')
 ;
 
 resLoader.createCat('前端学习网站')
@@ -29,6 +30,10 @@ resLoader.createCat('UED大集合')
 ;
 resLoader.createCat('git')
 .addItem('猴子都能懂git','http://backlogtool.com/','浅显易懂的git入门')
+
+resLoader.createCat('资源')
+.addItem('jquery插件库','http://www.jq22.com/','实用插件工具，媒体播放，文件数，ui操作等')
+
 
 
 resLoader.render();
