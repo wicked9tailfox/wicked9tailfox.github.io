@@ -40,7 +40,7 @@ resLoader.createCat('资源')
 
 resLoader.createCat('文档')
 .addItem("sass官方文档",'http://sass-lang.com/documentation/file.SASS_REFERENCE.html#using_sass','sass官方文档');
-
+.addItem("sass中文教程",'http://www.w3cplus.com/sassguide/syntax.html','简单，明了，实用');
 
 resLoader.render();
 
