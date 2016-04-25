@@ -38,6 +38,10 @@ resLoader.createCat('资源')
 .addItem('jquery插件库','http://www.jq22.com/','实用插件工具，媒体播放，文件数，ui操作等')
 .addItem('前端导航','http://fd.1t1d.com/','资源整合，前端博客，前端咨询')
 
+resLoader.createCat('文档')
+.addItem("sass官方文档",'http://sass-lang.com/documentation/file.SASS_REFERENCE.html#using_sass','sass官方文档');
+
+
 resLoader.render();
 
 
