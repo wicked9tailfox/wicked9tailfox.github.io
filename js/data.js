@@ -39,7 +39,7 @@ resLoader.createCat('资源')
 .addItem('前端导航','http://fd.1t1d.com/','资源整合，前端博客，前端咨询')
 
 resLoader.createCat('文档')
-.addItem("sass官方文档",'http://sass-lang.com/documentation/file.SASS_REFERENCE.html#using_sass','sass官方文档');
+.addItem("sass官方文档",'http://sass-lang.com/documentation/file.SASS_REFERENCE.html#using_sass','sass官方文档')
 .addItem("sass中文教程",'http://www.w3cplus.com/sassguide/syntax.html','简单，明了，实用');
 
 resLoader.render();
