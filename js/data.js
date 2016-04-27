@@ -4,6 +4,8 @@ resLoader.createCat('工具')
 .addItem('在线工具','http://tool.lu/','在线工具')
 .addItem('mindmeister','https://www.mindmeister.com/zh','传说中最好的在线思维导图工具')
 .addItem('icomoon','https://icomoon.io/','ico图标，ico font，svg图标')
+.addItem('jsbin','http://jsbin.com/','前端操练场，见过最好的')
+
 ;
 
 resLoader.createCat('CDN')
