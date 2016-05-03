@@ -6,6 +6,7 @@ resLoader.createCat('工具')
 .addItem('icomoon','https://icomoon.io/','ico图标，ico font，svg图标')
 .addItem('jsbin','http://jsbin.com/','前端操练场，见过最好的')
 .addItem('css3maker','http://www.css3maker.com/','这款工具非常强大，可在线演示渐变、阴影、旋转、动画等非常多的效果')
+.addItem('modao.cc','https://modao.cc/','免费的移动应用原型与线框图工具')
 ;
 
 resLoader.createCat('CDN')
