@@ -8,6 +8,7 @@ resLoader.createCat('工具')
 .addItem('css3maker','http://www.css3maker.com/','这款工具非常强大，可在线演示渐变、阴影、旋转、动画等非常多的效果')
 .addItem('modao.cc','https://modao.cc/','免费的移动应用原型与线框图工具')
 .addItem('processon.com','https://www.processon.com/','免费在线作图工具,UML作图,UI界面原型设计,流程图,思维导图')
+.addItem('overapi.com','http://overapi.com/','史上最全的开发人员速查手册')
 ;
 
 resLoader.createCat('CDN')
