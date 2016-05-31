@@ -9,6 +9,7 @@ resLoader.createCat('工具')
 .addItem('modao.cc','https://modao.cc/','免费的移动应用原型与线框图工具')
 .addItem('processon.com','https://www.processon.com/','免费在线作图工具,UML作图,UI界面原型设计,流程图,思维导图')
 .addItem('overapi.com','http://overapi.com/','史上最全的开发人员速查手册')
+.addItem('java在线编译','https://www.compilejava.net/','java在线编译')
 ;
 
 resLoader.createCat('CDN')
