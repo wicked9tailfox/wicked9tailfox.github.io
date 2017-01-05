@@ -23,6 +23,7 @@ resLoader.createCat('资料图书')
 .addItem('gitbook','https://www.gitbook.com','很多大牛存在，文章和总结')
 .addItem('Leo Hui的gitbook','https://www.gitbook.com/@leohxj','程序员的自我养成;前端工程师手册;学好node开发;Git学习与使用')
 .addItem('免费中文编程书资源','https://github.com/justjavac/free-programming-books-zh_CN','免费的编程中文书籍')
+.addItem('alistapart.com','http://alistapart.com/','web开发前沿深度好文')
 ;
 
 resLoader.createCat('前端学习网站')
@@ -33,6 +34,7 @@ resLoader.createCat('前端学习网站')
 .addItem('ES6入门','http://es6.ruanyifeng.com/',' 阮一峰ES6知识讲解')
 .addItem('ES6新功能','http://es6-features.org/#Constants','ECMAScript 6: New Features: Overview and Comparison')
 .addItem('如何跟上前端潮流','https://uptodate.frontendrescue.org/zh/','有大牛的学习方法，推荐网站')
+
 ;
 
 resLoader.createCat('UED大集合')
