@@ -1,20 +1,68 @@
----
-layout: default
----
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>FEIFEIZONE</title>
+<style>
+	*{margin:0;padding: 0}
+/* 清除浮动 */
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+    overflow:hidden;
+}
+.clearfix {
+    zoom:1; /* for ie6 & ie7 */
+}
+.clear {
+    clear:both;
+    display:block;
+    font-size:0;
+    height:0;
+    line-height:0;
+    overflow:hidden;
+}
+html,body{
+	background:#f1f0f0;
+	height: 100%;
+	width: 100%;
+	display: table;
+	text-align: center;
+}
+.main-container{
+	box-sizing: border-box;
+	padding:20px;
+	width:100%;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
 
-<div class="home">
-
-  <h1 class="page-heading">飞飞的空间</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+.main-container a{
+	display: block;
+	text-decoration: none;
+	line-height: 40px;
+	background: #000;
+	text-align: center;
+	border-radius: 20px;
+	max-width:600px;
+	margin:0 auto 10px;
+	color:#fff;
+	font-size: 14px;
+	background: #bd730a;
+	border: 1px solid #965c05;
+	margin-bottom: 10px;
+}
+.main-container a:hover{
+	background: #a26207;
+}
+</style>
+</head>
+<body>
+   <div class="main-container">
+   		<a href="./us.html">前端相关网站</a>
+   </div>
+</body>
+</html>
