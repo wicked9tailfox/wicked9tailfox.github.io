@@ -20,6 +20,7 @@ resLoader.createCat('CDN')
 ;
 
 resLoader.createCat('资料图书')
+.addItem('bestof.js','http://bestof.js.org/','github社区流行项目汇总')
 .addItem('gitbook','https://www.gitbook.com','很多大牛存在，文章和总结')
 .addItem('Leo Hui的gitbook','https://www.gitbook.com/@leohxj','程序员的自我养成;前端工程师手册;学好node开发;Git学习与使用')
 .addItem('免费中文编程书资源','https://github.com/justjavac/free-programming-books-zh_CN','免费的编程中文书籍')
