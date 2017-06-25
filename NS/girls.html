@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" charset="utf-8">
+  <meta name="viewport" content="width=device-width,  initial-scale=1" />  
+  <title>抢女神</title>
+  <link rel="stylesheet" href="style/ns.css?444">
+   <script src="js/zepto.min.js"></script>
+  </head>
+  <body>
+	<img src="images/gifts.jpg" id="gift-pic" style="display:none;"/>
+	<img src="images/girls.jpg" id="girls-pic" style="display:none;"/>
+  	<div id="ns-main-wraper" style="display:none;">
+		<div id="bonu"><span></span><em id="gift-bonus">+1</em></div>
+		<div id="ns-main">
+			<div id="gift-num-display"><span>10</span></div>
+			<div id="ns-num-display"><span>0</span></div>
+			<div class="card" id="gift-card" style="overflow:visible;">
+				<div class="gift-photo"></div>
+				<div class="desc"><span></span></div>
+				<canvas id="gift-canvas" class="bg" width="55" height="50"></canvas>
+				<span class="count"></span>
+			</div>
+			<div class="card ns-girl-card" id="g-card0">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card1">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card2">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card3">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card4">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card5">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card6">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card7">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 展示结果 -->
+	<div id="show-results" style="display:none;">
+			<div class="show-results-inner">
+				<p class="gameover-words">GAME OVER</p>
+				<p class="hearts">你抢到了<span></span>个女神</p>
+				<p class="conclusion"></p>
+				<div class="hanlders clearfix">
+					<a href="javascript:;" class="share-score fl">分享成绩</a>
+					<a href="girls.html" class="replay fr">再来一次</a>
+				</div>
+			</div>
+	</div>
+	<script src="js/girls.js"></script>
+	<script src="js/gifts.js"></script>
+	<script src="js/results.js"></script>
+	<script src="js/game.js"></script>
+	<script>	
+	  $(function(){
+		var body_h=$(window).height(),body_w=$(window).width(),level=body_w/320;extra_height=($(window).height()-480)/level,giftLoaded=false,girlsLoaded=false;
+		$('#ns-main-wraper').height(body_h).show();
+		$('#ns-main').css({marginTop:(body_w+extra_height+20)/2,height:body_w*0.72});
+		game.start();
+		$('#show-results .share-score').on('click',function(){
+			
+		})
+	  });
+	</script>
+  </body>
+  </html>
