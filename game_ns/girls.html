@@ -10,6 +10,7 @@
   <body>
 	<img src="images/gifts.jpg" id="gift-pic" style="display:none;"/>
 	<img src="images/girls.jpg" id="girls-pic" style="display:none;"/>
+
   	<div id="ns-main-wraper" style="display:none;">
 		<div id="bonu"><span></span><em id="gift-bonus">+1</em></div>
 		<div id="ns-main">
@@ -91,19 +92,23 @@
 				</div>
 			</div>
 	</div>
+
 	<script src="js/girls.js"></script>
 	<script src="js/gifts.js"></script>
 	<script src="js/results.js"></script>
 	<script src="js/game.js"></script>
 	<script>	
 	  $(function(){
-		var body_h=$(window).height(),body_w=$(window).width(),level=body_w/320;extra_height=($(window).height()-480)/level,giftLoaded=false,girlsLoaded=false;
+		var body_h=$(window).height(),
+		body_w=$(window).width(),
+		level=body_w/320;
+
+		extra_height=($(window).height()-480)/level,
+		giftLoaded=false,girlsLoaded=false;
+
 		$('#ns-main-wraper').height(body_h).show();
 		$('#ns-main').css({marginTop:(body_w+extra_height+20)/2,height:body_w*0.72});
 		game.start();
-		$('#show-results .share-score').on('click',function(){
-			
-		})
 	  });
 	</script>
   </body>

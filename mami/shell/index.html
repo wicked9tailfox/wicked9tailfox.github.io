@@ -1,0 +1,130 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#pc-shell{
+			border-radius: 40px 40px 0 0;
+			max-width:100%;
+			padding-bottom:calc(100%*1080/1920);
+			background: #000;
+			margin:0 auto;
+			position: relative;
+		}
+		#pc-shell .content-inner{
+			position: absolute;
+			width:90%;
+			height: 90%;
+			left: 50%;
+			top: 50%;
+			transform: translate3d(-50%,-50%,0);
+			background: #fff;
+		}
+		#pc-shell:before {
+			content:'';
+			display: block;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			padding-bottom: calc(100%*6/52);
+			width:100%;
+			z-index: 2;
+			transform: translate3d(0,100%,0);
+			background-color: #aaa;
+			border-radius: 0 0 40px 40px;
+			border-bottom: 1px solid rgba(255,255,255,0.4);
+		}
+
+		#pc-shell:after {
+			content:'';
+			display: block;
+			position: absolute;
+			width: calc(100%*3/53);
+    		padding-bottom: calc(100%*3*18/53/14);
+			background: url(https://www.apple.com/ac/globalfooter/3/zh_CN/assets/ac-footer/breadcrumbs/apple/icon_large.svg) no-repeat center bottom /100%;
+			bottom: 0;
+			left:50%;
+			transform: translate3d(-50%,120%,0);
+    		z-index: 3;
+		}
+
+		#pc-shell .surport{
+			width:100%;
+			position: absolute;
+			top: 100%;
+			padding-bottom: calc(16%);
+		}
+		
+		#pc-shell .surport .base-top,
+		#pc-shell .surport .base-bottom{
+			width: 30%;
+		    position: absolute;
+		    left: 50%;
+		    margin-left: -15%;
+		    
+		}
+		#pc-shell .surport .base-top{height:100%;}
+		#pc-shell .surport .base-bottom{padding-bottom: 30%;}
+
+		#pc-shell .surport .base-top:before,
+		#pc-shell .surport .base-top:after,
+		#pc-shell .surport .base-bottom:before,
+		#pc-shell .surport .base-bottom:after
+		{
+			content:'';
+			width:50%;
+			height:100%;
+			background: #aaa;
+			position: absolute;
+			top:0;
+			transform-origin: bottom;
+		}
+		#pc-shell .surport .base-top:before{
+			left: 0;
+			transform: skewX(-8deg);
+		}
+		#pc-shell .surport .base-top:after{
+			right: 0;
+			transform: skewX(8deg);
+		}
+
+		#pc-shell .surport .base-bottom{
+			top:100%;
+			width:30%;
+			padding-bottom: calc(16%);
+			background: #aaa;
+		}
+
+		#pc-shell .surport .base-bottom:before{
+			transform: skewX(-20deg);
+    		transform-origin: top left;
+    		border-radius: 0 0 0 30px;
+    		left:0;
+		}
+		#pc-shell .surport .base-bottom:after{
+			right:0;
+			transform: skewX(20deg);
+    		transform-origin: top right;
+    		border-radius: 0 0 30px 0;
+}
+
+
+
+
+
+
+		}
+	</style>
+</head>
+<body>
+<div id="pc-shell" style="width:1200px">
+	<div class="content-inner"></div>
+	<div class="surport">
+		<div class="base-top"></div>
+		<div class="base-bottom"></div>
+	</div>
+</div>
+<div id="pad-shell" style="display: none"></div>
+<div id="phone-shell" style="display: none;"></div>
+</body>
+</html>

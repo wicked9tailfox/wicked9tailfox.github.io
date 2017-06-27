@@ -520,7 +520,7 @@
 	},
 	beginTips:function(){
 		var html='<div class="warm-tips"><div class="warm-tips-inner"><p>游戏马上开始了，准备好了吗？</p><p class="warm-tips-count"></p></div></div>';
-		$('body').append(html);
+		$('#ns-main-wraper').append(html);
 		this.delayExec(5,function(count){
 		    if(count==0) count='GAME START!';
 			$('.warm-tips-count').html(count);
@@ -533,7 +533,7 @@
 		this.selectGiftsData();
 		this.initNsBox();
 		this.beginTips();
-		this.count(3);
+		this.count(10);
 		this.delayExec(0,function (){
 			$('.hobbys').removeClass('show');
 		}).

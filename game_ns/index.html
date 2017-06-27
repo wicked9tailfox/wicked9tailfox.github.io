@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" charset="utf-8">
+  <meta name="author" content="wang fei" /> 
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="抢女神">
+  <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- 微软的老式浏览器 -->
+	<meta name="MobileOptimized" content="320">
+	<!-- uc强制竖屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ强制竖屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!-- UC强制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- QQ强制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+	<!-- UC应用模式 -->
+	<meta name="browsermode" content="application">
+	<!-- QQ应用模式 -->
+	<meta name="x5-page-mode" content="app">
+	<!-- windows phone 点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+  <title>抢女神</title>
+  <link rel="stylesheet" href="style/ns.css?222">
+   <script src="js/zepto.min.js"></script>
+   <style>
+   #index-main{transition:transform .6s;-webkit-transition:transform .6s;background-color:#014B89;background-image:-webkit-gradient(radial,50% 50%,30,50% 50%,250,from(#1789E8),to(#014B89));background-repeat:no-repeat;background-position:center center;z-index:8;}
+   section, .section {
+   	position:absolute;width:100%;height:100%;overflow: hidden;min-height:100vh;
+   }
+   #index-main .boy,#index-main .girl{
+			transition: all 0.5s ease-in-out;
+   }
+
+   #index-main .boy{
+   	position: absolute;
+   	left: 0;
+   	top: 0;
+  	width: 132px;
+  	height: 213px;
+  	background: url(./images/index-boy.png);
+   }
+
+   #index-main .girl{
+    position: absolute;
+   	right: 0;
+   	bottom: 0;
+  	width: 138px;
+  	height: 201px;
+  	background: url(./images/index-girl.png);	
+   }
+		
+	 #index-main.check-rules .boy{
+		left: -132px;
+		top: -213px;
+		opacity: 0;
+	 }
+
+	 #index-main.check-rules .girl{
+			right: -138px;
+			bottom: -201px;
+			opacity: 0;
+	 }	
+
+   #ns-btns{width:190px;height:170px;position:absolute;left:50%;margin-left:-95px;top:50%;margin-top:-85px;background:url(images/ns-icon-new.png) no-repeat center center;background-size:80% 80%;z-index: 9;}
+
+   #index-main.check-rules #ns-btns{
+			transition: all 0.8s 0.3s ease-in;
+			top: 0;
+			margin-top: 0;
+   }
+
+
+
+   #ns-btns a{position:absolute;width:92px;height:40px;line-height:40px;border-radius:10px;text-align:center;color:#fff;font-size:24px;top:62px;}
+   #get-nans{left:-62px;background:#e9ca1f;}
+   #get-nans span{position:absolute;border-radius:4px;color: #9BAEC1;background:#324467;height:16px;line-height:16px;font-size:12px;right:-3px;bottom:-21px;padding:0 4px;}
+   #get-nvs{right:-62px;background:#013F6C;}
+   /*规则介绍*/
+   #ruler-desc{
+   	position:absolute;
+   	width:100%;
+   	height:100%;
+   	opacity:0;
+   	transition:all 1s 1.1s;
+   	-webkit-transition:all 1s 1.1s;
+   	box-sizing: border-box;
+    padding-top: 137px;
+   }
+
+   #index-main.check-rules #ruler-desc{
+		opacity: 1;
+   }
+
+   #ruler-desc h3{text-align:center;font-size:24px;padding:15px 0;color: #F2EB7D;}
+   .ruler-desc-matrix-wrap{padding:5px 0;}
+   .ruler-desc-matrix{width:143px;height:143px;margin:0 auto;overflow:hidden;border:2px dashed #fff;padding: 5px;border-radius: 10px;}
+   .ruler-desc-matrix ul{margin-right:-10px;}
+   .ruler-desc-matrix li{float:left;margin:0 10px 10px 0;width:41px;height:41px;background:url(images/rulerPic.png) no-repeat;}
+   .ruler-desc-matrix li.gift{background:url(images/rulerPic.png) no-repeat left -41px;}
+   .ruler-desc-words{padding:25px 10% 0;line-height:24px;font-size:14px;color:#fff;}
+   .ruler-desc-words p{margin-bottom:5px;text-align:left;}  
+  .start-game{display:block;position:absolute;width:120px;bottom:20px;left:50%;margin-left:-60px;text-align: center;height: 40px;line-height: 40px;font-size: 22px;background: #e9ca1f;color: #fff;border-radius: 4px;box-shadow: inset 0 -1px 1px #fff,0 1px 1px #746109;text-shadow:0 1px rgba(169, 147, 15, 0.6)}
+
+
+  /*显示规则*/
+  #game[data-dir='show-rules']{}
+  #game[data-dir='show-rules'] .boy,#game[data-dir='start-game'] .boy{
+  	left: -132px;
+		top: -213px;
+		opacity: 0;
+  }
+
+  #game[data-dir='show-rules'] .girl,#game[data-dir='start-game'] .girl{
+			right: -138px;
+			bottom: -201px;
+			opacity: 0;
+  }
+
+	#game[data-dir='show-rules'] #ns-btns,#game[data-dir='start-game'] #ns-btns{
+		transition: all 0.8s 0.3s ease-in;
+		top: 0;
+		margin-top: 0;		
+	}
+
+	#game[data-dir='show-rules'] #ruler-desc, #game[data-dir='start-game'] #ruler-desc{
+		opacity: 1;
+	}
+
+	/*开始游戏*/
+	#game[data-dir='start-game']{}
+	#game[data-dir='start-game'] #index-main{
+		transition: transform 1.5s ease-in-out;
+		transform: translate3d(0,-100%,0);
+	}
+ </style>
+  </head>
+  <body>
+  <div id="game" class="section">
+    <section id="index-main" style="display:none">
+  	<div class="boy"></div>
+  	<div class="girl"></div>
+		<div id="ns-btns">
+			<a href="#" id="get-nans">抢男神</a>
+			<a href="javascript:;" id="get-nvs" data-src="girls.html">抢女神</a>
+		</div>
+		<div id="ruler-desc">
+			<h3>规则介绍</h3>
+			<!-- 游戏图 -->
+			<div class="ruler-desc-matrix-wrap">
+				<div class="ruler-desc-matrix">
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li class="gift"></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			</div>
+			<div class="ruler-desc-words">
+				<p>游戏开始后，女神会“告诉”你她的爱好。你需要在有限的时间内，去关注她们。
+				你有8份礼物，每轮选择一位送出。送对了人，财色双收。送错了人，人财两空。
+				礼物用完，游戏结束。
+				总共有50位女神，你能得到几位？
+				</p>
+			</div>
+			<!-- <a href="girls.html" class="start-game nvshen">开始游戏</a> -->
+			<a href="javascript:void(0);" class="start-game nvshen">开始游戏</a>
+		</div>
+  </section>
+
+  <section id="ns-main-wraper" style="display:none;">
+		<div id="bonu"><span></span><em id="gift-bonus">+1</em></div>
+		<div id="ns-main">
+			<div id="gift-num-display"><span>10</span></div>
+			<div id="ns-num-display"><span>0</span></div>
+			<div class="card" id="gift-card" style="overflow:visible;">
+				<div class="gift-photo"></div>
+				<div class="desc"><span></span></div>
+				<canvas id="gift-canvas" class="bg" width="55" height="50"></canvas>
+				<span class="count"></span>
+			</div>
+			<div class="card ns-girl-card" id="g-card0">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card1">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card2">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card3">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card4">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card5">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card6">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+			<div class="card ns-girl-card" id="g-card7">
+				<div class="g-card-inner">
+					<div class="ns-photo"></div>
+					<div class="show-result"></div>
+					<div class="hobbys"><span></span></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- 展示结果 -->
+	<section id="show-results" style="display:none;">
+			<div class="show-results-inner">
+				<p class="gameover-words">GAME OVER</p>
+				<p class="hearts">你抢到了<span></span>个女神</p>
+				<p class="conclusion"></p>
+				<div class="hanlders clearfix">
+					<a href="javascript:;" class="share-score fl">分享成绩</a>
+					<a href="girls.html" class="replay fr">再来一次</a>
+				</div>
+			</div>
+	</section>	
+  </div>
+	<script src="js/girls.js"></script>
+	<script src="js/gifts.js"></script>
+	<script src="js/results.js"></script>
+	<script src="js/game.js"></script>
+   <script>	
+		$(function(){
+			$('#index-main').show();
+			$('#get-nvs').click(function(){
+				$('#game').attr('data-dir','show-rules');
+			});
+
+			// 开始游戏
+			$('.start-game').on('click',function(){
+				$('#game').attr('data-dir','start-game');
+				$('#ns-main-wraper').show();
+				setTimeout(function(){
+					game.start();
+					$('#ns-main').addClass('show');
+				}, 1500)
+				
+			});
+		});
+	</script>
+  </body>
+  </html>

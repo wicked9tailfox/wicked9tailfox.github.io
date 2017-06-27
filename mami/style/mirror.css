@@ -1,0 +1,75 @@
+/*
+@name : mirror.css
+@author : simon wang
+@date : 2014-6-15
+*/
+
+/*reset*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,legend,input,textarea,p,th,td{margin:0;padding:0;}
+a,input,button,select,textarea{outline:none}img{border:0;vertical-align:bottom;}em{font-style:normal}textarea{resize:none;}
+body{font:12px/1.5 \5FAE\8F6F\96C5\9ED1,\5B8B\4F53,Helvetica,Arial;}
+a{text-decoration:none;}
+a:hover{text-decoration:none;}
+ol,ul{list-style:none}
+h1,h2,h3,h4,h5{font-size:14px;}
+input,label,select{vertical-align:middle;font:100% Tahoma}
+.clearfix:before,.clearfix:after{content:".";display:table;height:0;font-size:0;line-height:0;visibility:hidden;}
+.clearfix:after{clear:both;}
+.clearfix{*zoom:1;}
+.fl{float:left;}
+.fr{float:right;}
+
+
+/*common bg*/
+#mirror-container,#mirror-container .mirror-left,#mirror-main-wrap a,#mirror-handlers-wrap a{background:url(../images/mirror-sprite.png) no-repeat;cursor:pointer;}
+#mirror-canvas{margin:-1px 0 0;position:absolute;left:0;top:0;}
+#target_body{position:relative;}
+
+/*mirror main*/
+#mirror-container{height:27px;position:fixed;z-index:9;right:10px;bottom:10px;padding:0 25px;background-position:right -333px;font-family:\5FAE\8F6F\96C5\9ED1;}
+#mirror-container .mirror-left{height:27px;width:25px;position:absolute;left:0;top:0;background-position:0 -303px;}
+#mirror-container .mirror-right{position:relative;}
+#mirror-container .mirror-right,#mirror-main-wrap{height:25px;}	
+#mirror-main-wrap{width:79px;border:1px solid #565656;border-left:none;border-right:none;width:0;overflow:hidden;}
+#mirror-main-wrap a{display:inline-block;width:25px;height:25px;}
+#mirror-main-wrap .view{border-right:1px solid #565656;}
+#mirror-main-wrap .view:hover,#mirror-main-wrap .view.selected{background-position:-25px 0;}
+#mirror-main-wrap .all-handler{background-position:0 -25px;border-right:1px solid #565656;}
+#mirror-main-wrap .all-handler:hover,#mirror-main-wrap .all-handler.selected{background-position:-25px -25px;}
+#mirror-main-wrap .setting{background-position:0 -50px;}
+#mirror-main-wrap .setting:hover,#mirror-main-wrap .setting.selected{background-position:-25px -50px;width:26px;}
+
+/*mirror handlers*/
+#mirror-handlers-wrap{position:absolute;left:0;bottom:22px;width:79px;height:120px;background:#fff;display:none;}
+#mirror-handlers-wrap a{float:left;width:38px;height:38px;border:1px solid #565656;margin:0 -1px 0 0;}
+#mirror-handlers-wrap a:hover,#mirror-handlers-wrap a.selected{position:relative;}
+#mirror-handlers-wrap .odd{margin:0 0 0 0;}
+#mirror-handlers-wrap .layers-alpha,#mirror-handlers-wrap .bg-move,#mirror-handlers-wrap .compare-align,#mirror-handlers-wrap .lang{margin-top:-1px;}
+#mirror-handlers-wrap .add-bg{background-position:0 -75px;}
+#mirror-handlers-wrap .add-bg:hover,#mirror-handlers-wrap .add-bg.selected{background-position:-38px -75px;}
+#mirror-handlers-wrap .layer-order{background-position:0 -113px;}
+#mirror-handlers-wrap .layer-order:hover,#mirror-handlers-wrap .layer-order.selected{background-position:-38px -113px;}
+#mirror-handlers-wrap .layers-alpha{background-position:0 -151px;}
+#mirror-handlers-wrap .layers-alpha:hover{background-position:-38px -151px;}
+#mirror-handlers-wrap .bg-move{background-position:0 -189px;}
+#mirror-handlers-wrap .bg-move:hover{background-position:-38px -189px;}
+#mirror-handlers-wrap .compare-align{background-position:0 -227px;}
+#mirror-handlers-wrap .compare-align:hover{background-position:-38px -227px;}
+#mirror-handlers-wrap .lang{background-position:0 -265px;}
+#mirror-handlers-wrap .lang:hover{background-position:-38px -265px;}
+
+#mm-stage {
+  min-height: 100vh;
+}
+
+/**/
+.fill-mirror-w{width:120px;padding:0 5px 0 0;height:30px;line-height:30px;position:absolute;top:-31px;left:0;border:1px solid #565656;text-align:right;overflow:hidden;}
+.fill-mirror-w input{border:none;float:left;width:100px;height:30px;line-height:30px;text-indent:5px;border-right:1px solid #565656;font:bold 12px arial;}
+
+/*mrror main-body*/
+#mirror-body{position:absolute;left:0;top:0;width:100%;height:100%;z-index:8;}
+#mirror-body-main{width:980px;margin:0 auto;height:100%;border:1px dashed #6B6B6B;cursor:move;position:relative;overflow:hidden;}
+#mirror-body-main.selected{border-color:#0083EB;}
+#mirror-tips{font-size:20px;position:absolute;top:50%;left:0;margin-top:-20px;width:100%;height:40px;line-height:40px;text-align:center;color:#6D848D;}
+#wrap_body.pt2{padding-top:2px;}
+
