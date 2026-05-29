@@ -812,40 +812,8 @@
                 <span style="color:${NEXT_VOWEL_COLOR}"><span style="position: relative; display: inline-block;">${vowelUnits[1][0]}<span class="pinyin-tone-modal" style="position: absolute; top: 0.25em; left: 50%; transform: translateX(-50%); color: ${symbolColor};">${symbol}</span></span>${vowelUnits[1].slice(1)}</span>    
                 `;
             } else {
-                finalVowelHtml = ` <span style="color:${NEXT_VOWEL_COLOR}"><span style="position: relative; display: inline-block;">${vowelUnits[0][0]}<span class="pinyin-tone-modal" style="position: absolute; top: 0.1em; left: 50%; transform: translateX(-50%); color: ${symbolColor};">${symbol}</span></span>${vowelUnits[0].slice(1)}</span>`
+                finalVowelHtml = ` <span style="color:${NEXT_VOWEL_COLOR}"><span style="position: relative; display: inline-block;">${vowelUnits[0][0]}<span class="pinyin-tone-modal" style="position: absolute; top: 0.25em; left: 50%; transform: translateX(-50%); color: ${symbolColor};">${symbol}</span></span>${vowelUnits[0].slice(1)}</span>`
             }
-
-           
-           
-
-        //    if (fullVowelText.length > 0) {
-        //        const firstChar = fullVowelText[0];
-        //        const color0 = FIRST_VOWEL_COLOR;
-        //        // 构建第一个字符及其声调
-        //        finalVowelHtml += `<span style="color: ${color0}; position: relative; display: inline-block;">${firstChar}<span class="pinyin-tone-modal" style="position: absolute; top: 0.1em; left: 50%; transform: translateX(-50%); color: ${symbolColor};">${symbol}</span></span>`;
-               
-        //        // 添加其余字符
-        //        for (let i = 1; i < fullVowelText.length; i++) {
-        //            const char = fullVowelText[i];
-        //            let unitIndex = -1;
-        //            let cumulativeLength = 0;
-        //            for (let j = 0; j < vowelUnits.length; j++) {
-        //                cumulativeLength += vowelUnits[j].length;
-        //                if (i < cumulativeLength) {
-        //                    unitIndex = j;
-        //                    break;
-        //                }
-        //            }
-        //            const color = unitIndex === 0 ? FIRST_VOWEL_COLOR : NEXT_VOWEL_COLOR;
-        //            finalVowelHtml += `<span style="color: ${color};">${char}</span>`;
-        //        }
-        //    }
-
-
-
-
-
-
 
            return `<div class="pinyin-word-container">
                <span class="pinyin-main">
