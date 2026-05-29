@@ -1,146 +1,132 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>拼音卡片制作</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>拼音卡片制作</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      body {
-        font-family:
-          "Arial Rounded MT Bold", "Hiragino Sans GB", "Microsoft YaHei",
-          sans-serif;
-        background-color: #f0f8ff; /* 淡蓝色背景 */
-        color: #333;
-        padding-bottom: 130px; /* 调整底部空间以适应单行按钮 */
-      }
+    body {
+      font-family: "Arial Rounded MT Bold", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background-color: #f0f8ff; /* 淡蓝色背景 */
+      color: #333;
+      padding-bottom: 130px; /* 调整底部空间以适应单行按钮 */
+    }
 
-      .container {
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 10px;
-      }
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 10px;
+    }
 
-      .section-title {
-        text-align: center;
-        font-size: 1.2em;
-        margin: 10px 0;
-        color: #5a5a5a;
-      }
+    /* 移除 section-title */
 
-      .consonant-section,
-      .vowel-section {
-        margin-bottom: 20px;
-      }
+    .consonant-section,
+    .vowel-section {
+      margin-bottom: 20px;
+    }
 
-      /* 修改滚动区域为垂直滚动 */
-      .scrollable-area {
-        display: flex;
-        flex-direction: column; /* 垂直排列 */
-        overflow-y: auto; /* 纵向滚动 */
-        max-height: 350px; /* 调整最大高度以显示约5行 */
-        padding: 10px 5px;
-        gap: 10px;
-        border: 1px dashed #ccc;
-        border-radius: 10px;
-        background-color: #fafafa;
-        position: relative; /* 确保其子元素的 z-index 受控 */
-      }
+    /* 修改滚动区域为垂直滚动 */
+    .scrollable-area {
+      display: flex;
+      flex-direction: column; /* 垂直排列 */
+      overflow-y: auto; /* 纵向滚动 */
+      max-height: 350px; /* 调整最大高度以显示约5行 */
+      padding: 10px 5px;
+      gap: 10px;
+      border: 1px dashed #ccc;
+      border-radius: 10px;
+      background-color: #fafafa;
+      position: relative; /* 确保其子元素的 z-index 受控 */
+    }
 
-      /* 声母项保持单个展示 */
-      .consonant-row {
+    /* 声母项保持单个展示 */
+    .consonant-row {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
         margin-bottom: 5px;
-      }
+    }
 
-      .phoneme-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 55px;
-        height: 55px;
-        border-radius: 12px;
-        font-size: 1.4em;
-        font-weight: bold;
-        cursor: pointer;
-        transition:
-          background-color 0.2s,
-          color 0.2s;
-        user-select: none;
-        flex: 1 1 auto;
-        max-width: calc(20% - 8px);
-        position: relative; /* 为内部的声调符号定位 */
-      }
+    .phoneme-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 55px;
+      height: 55px;
+      border-radius: 12px;
+      font-size: 1.4em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+      user-select: none;
+      flex: 1 1 auto;
+      max-width: calc(20% - 8px);
+      position: relative; /* 为内部的声调符号定位 */
+    }
 
-      .phoneme-item:hover {
-        /* 移除缩放和阴影 */
-      }
+    .phoneme-item:hover {
+      /* 移除缩放和阴影 */
+    }
 
-      /* 修改选中高亮效果为背景色和文字色变化 */
-      .phoneme-item.selected {
-        background-color: #ffeb3b;
-        color: #333;
-      }
+    /* 修改选中高亮效果为背景色和文字色变化 */
+    .phoneme-item.selected {
+      color: white;
+      font-weight: bold;
+    }
 
-      .consonant-item {
-        background-color: #d1e8ff;
-        color: #1e88e5;
-        border: 2px solid #bbdefb;
-      }
+    .consonant-item {
+      background-color: #d1e8ff;
+      color: #1e88e5;
+      border: 2px solid #bbdefb;
+    }
 
-      .consonant-item.selected {
-        background-color: #ffeb3b;
-        color: #333;
-      }
+    .consonant-item.selected {
+         background-color: #1e88e5; /* 选中背景蓝色 */
+         color: white; /* 选中文字白色 */
+    }
 
-      /* 韵母行容器，每个韵母占一行 */
-      .vowel-row {
+    /* 韵母行容器，每个韵母占一行 */
+    .vowel-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 10px;
         padding: 5px 0;
-      }
+    }
 
-      .vowel-label {
-        min-width: 40px;
-        font-size: 1.3em;
-        font-weight: bold;
-        color: #ef6c00;
-        text-align: center;
-      }
+    /* 移除 .vowel-label */
 
-      .vowel-options {
+    .vowel-options {
         display: flex;
         flex: 1;
-        gap: 8px;
-      }
+        /* gap: 8px; */
+        justify-content: space-between;
+    }
 
-      .vowel-item {
-        background-color: #ffe0b2;
-        color: #ef6c00;
-        border: 2px solid #ffcc80;
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative; /* 为内部的声调符号定位 */
-      }
+    .vowel-item {
+      background-color: #ffe0b2;
+      color: #ef6c00;
+      border: 2px solid #ffcc80;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative; /* 为内部的声调符号定位 */
+    }
 
-      .vowel-item.selected {
-        background-color: #ffeb3b; /* 恢复选中高亮 */
-        color: #333;
-      }
+    .vowel-item.selected {
+         background-color: #ef6c00; /* 选中背景橙色 */
+         color: white; /* 选中文字白色 */
+    }
 
-      /* 四声符号展示 (使用实际符号)，采用绝对定位 */
-      .tone-symbol {
+    /* 四声符号展示 (使用实际符号)，采用绝对定位 */
+    .tone-symbol {
         font-size: 1.2em; /* 符号大小 */
         font-weight: bold;
         position: absolute; /* 关键：改为绝对定位 */
@@ -149,31 +135,33 @@
         transform: translateX(-50%); /* 精确居中 */
         line-height: 1;
         z-index: 1; /* 确保在父元素内层叠 */
-      }
-      /* 颜色由JS动态设置 */
+    }
+    /* 颜色由JS动态设置 */
 
-      /* .preview-area 已被删除 */
 
-      .candidate-list {
+    /* .preview-area 已被删除 */
+
+
+    .candidate-list {
         background-color: #ffffff;
         border-radius: 15px;
         padding: 15px;
         margin: 15px 0;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      }
-      .candidate-list-title {
+    }
+    .candidate-list-title {
         font-size: 1.1em;
         margin-bottom: 10px;
         color: #5a5a5a;
         text-align: center;
-      }
-      .candidate-items {
+    }
+    .candidate-items {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
         justify-content: center;
-      }
-      .candidate-item {
+    }
+    .candidate-item {
         background-color: #e3f2fd; /* 浅蓝背景 */
         color: #1565c0; /* 深蓝字 */
         padding: 8px 15px;
@@ -183,19 +171,19 @@
         align-items: center;
         position: relative; /* 为内部的声调符号定位 */
         min-height: 40px;
-      }
-      .candidate-item .pinyin-consonant {
+    }
+    .candidate-item .pinyin-consonant { 
         color: #1e88e5; /* 蓝色声母 */
         margin-right: 0; /* 声调符号不再由margin分隔 */
         position: relative; /* 为内部的声调符号定位 */
         display: inline-block; /* 确保定位有效 */
         font-weight: bold;
-      }
-      .candidate-item .pinyin-vowel {
+    }
+    .candidate-item .pinyin-vowel { 
         color: #ef6c00; /* 橙色韵母 */
         font-weight: bold;
-      }
-      .candidate-item .pinyin-tone {
+    }
+    .candidate-item .pinyin-tone {
         font-size: 1.2em; /* 符号大小 */
         font-weight: bold;
         position: absolute; /* 关键：改为绝对定位 */
@@ -204,27 +192,28 @@
         transform: translateX(-50%); /* 精确居中 */
         line-height: 1;
         z-index: 2; /* 确保在拼音文字之上 */
-      }
-      .candidate-item .pinyin-vowel-special {
-        color: #f44336; /* 红色特殊韵母 */
+    }
+    .candidate-item .pinyin-vowel-special {
+        color: #F44336; /* 红色特殊韵母 */
         font-weight: bold;
-      }
+    }
 
-      .controls {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        display: flex;
-        padding: 15px 20px;
-        background-color: #ffffff;
-        border-top: 1px solid #e0e0e0;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-        gap: 10px; /* 调整按钮间距 */
-        z-index: 999; /* 关键：确保按钮在最上层 */
-      }
 
-      .current-selection {
+    .controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      padding: 15px 20px;
+      background-color: #ffffff;
+      border-top: 1px solid #e0e0e0;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+      gap: 10px; /* 调整按钮间距 */
+      z-index: 999; /* 关键：确保按钮在最上层 */
+    }
+
+    .current-selection {
         flex: 3; /* 选择区更宽 */
         display: flex;
         align-items: center;
@@ -238,25 +227,26 @@
         color: #333;
         min-width: 0; /* 防止flex溢出 */
         /* height: 50px; 设定一个高度 */
-      }
-      .current-selection .selection-consonant {
+    }
+    .current-selection .selection-consonant {
         color: #1e88e5; /* 蓝色 */
-        margin-right: 10px;
         font-size: 1.8em;
-      }
-      .current-selection .selection-vowel-container {
-        position: relative; /* 为内部的声调符号定位 */
-        display: inline-block; /* 确保定位有效 */
-      }
-      .current-selection .selection-vowel {
+    }
+    .current-selection .selection-vowel-container {
+        /* 改为 inline-flex，确保内部元素基线对齐 */
+        display: inline-flex;
+        align-items: baseline;
+        font-size: 1.8em; /* 统一字体大小 */
+    }
+    .current-selection .selection-vowel {
         color: #ef6c00; /* 橙色 */
         font-size: 1.8em;
-      }
-      .current-selection .selection-vowel-special {
-        color: #f44336; /* 红色 */
+    }
+    .current-selection .selection-vowel-special {
+        color: #F44336; /* 红色 */
         font-size: 1.8em;
-      }
-      .current-selection .selection-tone {
+    }
+    .current-selection .selection-tone {
         font-size: 1.2em;
         font-weight: bold;
         position: absolute; /* 绝对定位 */
@@ -265,673 +255,631 @@
         transform: translateX(-50%); /* 精确居中 */
         line-height: 1;
         z-index: 2; /* 确保在拼音文字之上 */
-      }
+    }
 
-      .btn {
-        padding: 15px;
-        border: none;
-        border-radius: 50px;
-        font-size: 1.1em;
-        font-weight: bold;
-        cursor: pointer;
-        transition: opacity 0.2s;
-        text-align: center;
-      }
 
-      .btn-add {
-        flex: 2; /* 添加按钮较宽 */
-        background-color: #4caf50;
-        color: white;
-      }
+    .btn {
+      padding: 15px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-align: center;
+    }
 
-      .btn-finish {
-        flex: 2; /* 完成按钮较宽 */
-        background-color: #ff9800;
-        color: white;
-      }
+    .btn-add {
+      flex: 2; /* 添加按钮较宽 */
+      background-color: #4caf50;
+      color: white;
+    }
 
-      .btn:active {
+    .btn-finish {
+      flex: 2; /* 完成按钮较宽 */
+      background-color: #ff9800;
+      color: white;
+    }
+
+    .btn:active {
         opacity: 0.8;
-      }
+    }
 
-      /* 弹窗样式 */
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.95);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-      }
+    /* 弹窗样式 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
 
-      .modal-content {
-        background: white; /* 改为白色背景 */
-        width: 95%;
-        max-width: 700px; /* 调整最大宽度 */
-        padding: 30px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-        animation: zoomIn 0.3s;
-        color: #333; /* 文字改为深色 */
-      }
+    .modal-content {
+      background: white; /* 改为白色背景 */
+      width: 95%;
+      max-width: 700px; /* 调整最大宽度 */
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+      animation: zoomIn 0.3s;
+      color: #333; /* 文字改为深色 */
+    }
 
-      @keyframes zoomIn {
-        from {
-          transform: scale(0.8);
-          opacity: 0;
-        }
-        to {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
+    @keyframes zoomIn {
+      from {transform: scale(0.8); opacity: 0;}
+      to {transform: scale(1); opacity: 1;}
+    }
 
-      .modal-title {
-        font-size: 1.6em;
-        margin-bottom: 25px;
-        color: #3f51b5; /* 标题改为蓝色 */
-      }
+    .modal-title {
+      font-size: 1.6em;
+      margin-bottom: 25px;
+      color: #3f51b5; /* 标题改为蓝色 */
+    }
 
-      .final-pinyin-list {
-        font-size: 3.5em;
-        line-height: 1.8;
-        color: #3f51b5; /* 默认文字颜色 */
-        display: flex;
-        flex-direction: row; /* 行方向 */
-        flex-wrap: wrap; /* 允许换行 */
-        justify-content: center; /* 居中 */
-        align-items: center; /* 垂直居中 */
-        gap: 30px; /* 字与字之间的间距 */
-      }
+    .final-pinyin-list {
+      font-size: 3.5em;
+      line-height: 1.8;
+      color: #3f51b5; /* 默认文字颜色 */
+      display: flex;
+      justify-content: center; /* 居中 */
+      align-items: center; /* 垂直居中 */
+      gap: 30px; /* 字与字之间的间距 */
+      flex-direction: column;
+    }
 
-      .final-pinyin-list .pinyin-word-container {
+    .final-pinyin-list .pinyin-word-container {
         flex: 0 0 auto; /* 固定宽度，不伸缩 */
         display: flex; /* 每个拼音词内部flex布局 */
         align-items: center; /* 垂直居中 */
         justify-content: center; /* 水平居中 */
         min-height: 1.5em;
         white-space: nowrap; /* 防止内部换行 */
-      }
-
-      .final-pinyin-list .pinyin-main {
+        background-color: rgba(255, 235, 59, 0.2); /* 浅黄色半透明背景 */
+        border-radius: 10px;
+        padding: 0 15px;
+    }
+    
+    .final-pinyin-list .pinyin-main {
         position: relative; /* 为内部的声调符号定位 */
         z-index: 1;
-        display: inline-block; /* 确保定位有效 */
-      }
-      .final-pinyin-list .pinyin-consonant-modal {
+        display: flex;
+    }
+    .final-pinyin-list .pinyin-consonant-modal {
         color: #1e88e5; /* 蓝色声母 */
         font-weight: bold;
-      }
-      .final-pinyin-list .pinyin-vowel-container-modal {
+    }
+    .final-pinyin-list .pinyin-vowel-container-modal {
         position: relative; /* 为内部的声调符号定位 */
-        display: inline-block; /* 确保定位有效 */
-      }
-      .final-pinyin-list .pinyin-vowel-modal {
+        display: flex; /* 确保定位有效 */
+    }
+    .final-pinyin-list .pinyin-vowel-modal {
         color: #ef6c00; /* 统一橙色韵母 */
         font-weight: bold;
-      }
-      .final-pinyin-list .pinyin-vowel-modal-special {
-        color: #f44336; /* 统一红色特殊韵母 */
+    }
+    .final-pinyin-list .pinyin-vowel-modal-special {
+        color: #F44336; /* 统一红色特殊韵母 */
         font-weight: bold;
-      }
-      .final-pinyin-list .pinyin-tone-modal {
+    }
+    .final-pinyin-list .pinyin-tone-modal {
         font-size: 1.2em;
         font-weight: bold;
         position: absolute; /* 关键：改为绝对定位 */
-        top: 0.1em; /* 统一top值 */
+        top: 0.2em; /* 统一top值 */
         left: 50%; /* 水平居中 */
         transform: translateX(-50%); /* 精确居中 */
         line-height: 1;
         z-index: 2;
-      }
+    }
 
-      .close-btn {
-        margin-top: 30px;
-        padding: 14px 35px;
-        background-color: #4caf50; /* 按钮改为绿色 */
-        color: white;
-        border: none;
-        border-radius: 50px;
-        font-size: 1.1em;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      }
-      .close-btn:hover {
+
+    .close-btn {
+      margin-top: 30px;
+      padding: 14px 35px;
+      background-color: #4caf50; /* 按钮改为绿色 */
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .close-btn:hover {
         background-color: #43a047; /* 按钮悬停色 */
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="consonant-section">
-        <div id="consonantArea" class="scrollable-area"></div>
-      </div>
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="consonant-section">
+      <div id="consonantArea" class="scrollable-area"></div>
+    </div>
 
-      <div class="vowel-section">
-        <div id="vowelArea" class="scrollable-area"></div>
-      </div>
+    <div class="vowel-section">
+      <div id="vowelArea" class="scrollable-area"></div>
+    </div>
 
-      <!-- 候选字列表 -->
-      <div class="candidate-list">
+    <!-- 候选字列表 -->
+    <div class="candidate-list">
         <div class="candidate-list-title">已选拼音</div>
-        <div id="candidateList" class="candidate-items"></div>
-      </div>
-
-      <!-- 预览区已删除 -->
+        <div id="candidateList" class="candidate-items">
+        </div>
     </div>
 
-    <div class="controls">
-      <!-- 当前选择区 -->
-      <div id="currentSelection" class="current-selection">
+    <!-- 预览区已删除 -->
+
+  </div>
+
+  <div class="controls">
+    <!-- 当前选择区 -->
+    <div id="currentSelection" class="current-selection">
         <!-- 内容由JS动态填充 -->
-      </div>
-      <button id="addBtn" class="btn btn-add">添加</button>
-      <button id="finishBtn" class="btn btn-finish">完成</button>
     </div>
+    <button id="addBtn" class="btn btn-add">添加</button>
+    <button id="finishBtn" class="btn btn-finish">完成</button>
+  </div>
 
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <h2 class="modal-title">我的拼音卡片</h2>
-        <div id="finalPinyinList" class="final-pinyin-list"></div>
-        <button id="closeModalBtn" class="close-btn">关闭</button>
-      </div>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <div id="finalPinyinList" class="final-pinyin-list"></div>
+      <button id="closeModalBtn" class="close-btn">关闭</button>
     </div>
+  </div>
 
-    <script>
-      // 声母数据
-      const consonants = [
-        "b",
-        "p",
-        "m",
-        "f",
-        "d",
-        "t",
-        "n",
-        "l",
-        "g",
-        "k",
-        "h",
-        "j",
-        "q",
-        "x",
-        "zh",
-        "ch",
-        "sh",
-        "r",
-        "z",
-        "c",
-        "s",
-        "y",
-        "w",
-      ];
+  <script>
+    // 声母数据
+    const consonants = [
+      'b', 'p', 'm', 'f', 'd', 't', 'n', 'l',
+      'g', 'k', 'h', 'j', 'q', 'x',
+      'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w'
+    ];
 
-      // 韵母数据 (完整版)
-      const vowels = [
-        // 单韵母
-        "a",
-        "o",
-        "e",
-        "i",
-        "u",
-        "ü",
-        // 复韵母
-        "ai",
-        "ei",
-        "ui",
-        "ao",
-        "ou",
-        "iu",
-        "ie",
-        "üe",
-        "er",
-        // 鼻韵母
-        "an",
-        "en",
-        "in",
-        "un",
-        "ün",
-        "ang",
-        "eng",
-        "ing",
-        "ong",
-      ];
+    // 韵母数据 (完整版)
+    const vowels = [
+      // 单韵母
+      'a', 'o', 'e', 'i', 'u', 'ü',
+      // 复韵母
+      'ai', 'ei', 'ui', 'ao', 'ou', 'iu', 'ie', 'üe', 'er',
+      // 鼻韵母
+      'an', 'en', 'in', 'un', 'ün', 'ang', 'eng', 'ing', 'ong'
+    ];
 
-      let selectedConsonant = null;
-      let selectedVowels = []; // 存储选中的韵母
-      let tone = 1;
-      let pinyinList = []; // 存储 {fullPinyin, tone, vowelUnits} 结构
+    let selectedConsonant = null;
+    let selectedVowels = []; // 存储选中的韵母
+    let tone = 1;
+    let pinyinList = []; // 存储 {fullPinyin, tone, vowelUnits} 结构
 
-      // 渲染声母区域
-      function renderConsonants() {
-        const area = document.getElementById("consonantArea");
-        area.innerHTML = "";
-        for (let i = 0; i < consonants.length; i += 5) {
-          const row = document.createElement("div");
-          row.className = "consonant-row";
+    // 定义韵母单元颜色：第一个单元用红色，后续单元用橙色
+    const FIRST_VOWEL_COLOR = '#f9a701'; // 红色
+    const NEXT_VOWEL_COLOR = '#ef6c00'; // 橙色
+
+    // 渲染声母区域
+    function renderConsonants() {
+      const area = document.getElementById('consonantArea');
+      area.innerHTML = '';
+      for (let i = 0; i < consonants.length; i += 5) {
+          const row = document.createElement('div');
+          row.className = 'consonant-row';
           const rowChars = consonants.slice(i, i + 5);
-          rowChars.forEach((char) => {
-            const item = document.createElement("div");
-            item.className = "phoneme-item consonant-item";
+          rowChars.forEach(char => {
+            const item = document.createElement('div');
+            item.className = 'phoneme-item consonant-item';
             item.textContent = char;
-            item.addEventListener("click", () => selectConsonant(char));
+            item.addEventListener('click', () => selectConsonant(char));
             row.appendChild(item);
           });
           area.appendChild(row);
-        }
       }
+    }
 
-      // 渲染韵母区域
-      function renderVowels() {
-        const area = document.getElementById("vowelArea");
-        area.innerHTML = "";
-        vowels.forEach((vowel) => {
-          const row = document.createElement("div");
-          row.className = "vowel-row";
+    // 渲染韵母区域
+    function renderVowels() {
+      const area = document.getElementById('vowelArea');
+      area.innerHTML = '';
+      vowels.forEach(vowel => {
+          const row = document.createElement('div');
+          row.className = 'vowel-row';
 
-          const label = document.createElement("div");
-          label.className = "vowel-label";
-          label.textContent = vowel;
-          row.appendChild(label);
+          // 移除 label
 
-          const optionsContainer = document.createElement("div");
-          optionsContainer.className = "vowel-options";
-
+          const optionsContainer = document.createElement('div');
+          optionsContainer.className = 'vowel-options';
+ 
           for (let t = 1; t <= 4; t++) {
-            const item = document.createElement("div");
-            item.className = `phoneme-item vowel-item`;
-            // 将韵母分为首字母和其他部分，用于定位声调
-            const firstChar = vowel.charAt(0);
-            const restChars = vowel.substring(1);
-
-            // 清空内容，重新构建
-            item.textContent = "";
-
-            // 创建一个容器来包裹首字母
-            const firstCharSpan = document.createElement("span");
-            firstCharSpan.textContent = firstChar;
-            firstCharSpan.style.position = "relative"; // 为符号定位
-            firstCharSpan.style.display = "inline-block"; // 确保定位有效
-
-            // 创建并设置声调符号
-            const symbolSpan = document.createElement("span");
-            symbolSpan.className = "tone-symbol";
-            const toneSymbols = { 1: "ˉ", 2: "ˊ", 3: "ˇ", 4: "ˋ" };
-            symbolSpan.textContent = toneSymbols[t];
-            symbolSpan.style.color = [
-              "#9E9E9E",
-              "#4CAF50",
-              "#FFC107",
-              "#F44336",
-            ][t - 1];
-
-            // 位置已在CSS中统一设置
-
-            firstCharSpan.appendChild(symbolSpan);
-
-            // 创建剩余字母的容器
-            const restSpan = document.createElement("span");
-            restSpan.textContent = restChars;
-
-            item.appendChild(firstCharSpan);
-            item.appendChild(restSpan);
-
-            item.addEventListener("click", () => selectVowel(vowel, t)); // 将vowel参数传递给事件处理器
-            optionsContainer.appendChild(item);
+              const item = document.createElement('div');
+              item.className = `phoneme-item vowel-item`;
+              // 将韵母分为首字母和其他部分，用于定位声调
+              const firstChar = vowel.charAt(0);
+              const restChars = vowel.substring(1);
+              
+              // 清空内容，重新构建
+              item.textContent = '';
+              
+              // 创建一个容器来包裹首字母
+              const firstCharSpan = document.createElement('span');
+              firstCharSpan.textContent = firstChar;
+              firstCharSpan.style.position = 'relative'; // 为符号定位
+              firstCharSpan.style.display = 'inline-block'; // 确保定位有效
+              
+              // 创建并设置声调符号
+              const symbolSpan = document.createElement('span');
+              if (firstChar === 'ü') {
+                symbolSpan.style.top = 0;
+              }
+              symbolSpan.className = 'tone-symbol';
+              const toneSymbols = {'1': 'ˉ', '2': 'ˊ', '3': 'ˇ', '4': 'ˋ'};
+              symbolSpan.textContent = toneSymbols[t];
+              symbolSpan.style.color = ['#9E9E9E', '#4CAF50', '#FFC107', '#F44336'][t-1]; 
+           
+              
+              // 位置已在CSS中统一设置
+              
+              firstCharSpan.appendChild(symbolSpan);
+              
+              // 创建剩余字母的容器
+              const restSpan = document.createElement('span');
+              restSpan.textContent = restChars;
+              
+              item.appendChild(firstCharSpan);
+              item.appendChild(restSpan);
+              
+              // 修正事件监听器：直接绑定到 item 上
+              item.addEventListener('click', function() {
+                  selectVowel(vowel, t);
+              });
+              optionsContainer.appendChild(item);
           }
           row.appendChild(optionsContainer);
           area.appendChild(row);
-        });
-      }
+      });
+    }
 
-      function selectConsonant(char) {
-        document
-          .querySelectorAll(".consonant-item.selected")
-          .forEach((el) => el.classList.remove("selected"));
-        event.target.classList.add("selected");
-        selectedConsonant = char;
-        updateCurrentSelection();
-      }
 
-      function selectVowel(vowel, t) {
-        // 接收vowel参数
-        // 更新声调
+    function selectConsonant(char) {
+      document.querySelectorAll('.consonant-item.selected').forEach(el => el.classList.remove('selected'));
+      event.target.classList.add('selected');
+      selectedConsonant = char;
+      updateCurrentSelection();
+    }
+
+    // 简化 selectVowel 函数
+    function selectVowel(vowel, t) {
         tone = t;
 
-        // 查找当前韵母是否已被选中
         const index = selectedVowels.indexOf(vowel);
-
         if (index > -1) {
-          // 如果已选中，则取消选择
-          selectedVowels.splice(index, 1);
-          // 移除对应的UI选中状态
-          // 为了正确移除状态，我们需要找到对应的所有选项
-          const allItems = document.querySelectorAll(`.vowel-item`);
-          allItems.forEach((item) => {
-            // 直接比较内部的韵母标签和当前点击的韵母
-            const label = item
-              .closest(".vowel-row")
-              .querySelector(".vowel-label");
-            if (label && label.textContent === vowel) {
-              item.classList.remove("selected");
-            }
-          });
+            selectedVowels.splice(index, 1);
         } else {
-          // 如果未选中
-          if (selectedVowels.length < 2) {
-            // 如果已选少于2个，则添加
-            selectedVowels.push(vowel);
-            // 添加UI选中状态 - 选中当前点击的选项
-            event.target.classList.add("selected"); // event.target 是点击的那个带声调的vowel-item
-          } else {
-            // 如果已选满2个，则替换最后一个
-            const lastSelected = selectedVowels.pop();
-            // 移除旧的UI选中状态
-            const allItems = document.querySelectorAll(`.vowel-item`);
-            allItems.forEach((item) => {
-              const label = item
-                .closest(".vowel-row")
-                .querySelector(".vowel-label");
-              if (label && label.textContent === lastSelected) {
-                item.classList.remove("selected");
-              }
-            });
-
-            // 添加新的
-            selectedVowels.push(vowel);
-            event.target.classList.add("selected");
-          }
-        }
-
-        updateCurrentSelection();
-      }
-
-      function updateCurrentSelection() {
-        const selectionDiv = document.getElementById("currentSelection");
-        selectionDiv.innerHTML = ""; // 清空内容
-
-        if (selectedConsonant && selectedVowels.length > 0) {
-          const consonantSpan = document.createElement("span");
-          consonantSpan.className = "selection-consonant";
-          consonantSpan.textContent = selectedConsonant;
-
-          const vowelContainerSpan = document.createElement("span");
-          vowelContainerSpan.className = "selection-vowel-container";
-
-          // 拼接所有选中的韵母
-          const fullVowelText = selectedVowels.join("");
-          // 为拼接后的韵母的第一个字符添加声调
-          const vowelFirstChar = fullVowelText.charAt(0);
-          const vowelFirstSpan = document.createElement("span");
-          vowelFirstSpan.className = "selection-vowel";
-          vowelFirstSpan.textContent = vowelFirstChar;
-
-          const toneSpan = document.createElement("span");
-          toneSpan.className = "selection-tone";
-          const toneSymbols = { 1: "ˉ", 2: "ˊ", 3: "ˇ", 4: "ˋ" };
-          toneSpan.textContent = toneSymbols[tone];
-          toneSpan.style.color = ["#9E9E9E", "#4CAF50", "#FFC107", "#F44336"][
-            tone - 1
-          ];
-
-          vowelContainerSpan.appendChild(vowelFirstSpan);
-          vowelContainerSpan.appendChild(toneSpan);
-
-          // 处理剩余字符，区分独立的 i 和 u
-          // 根据原始的 selectedVowels 数组来判断
-          for (let i = 1; i < selectedVowels.length; i++) {
-            // 从第二个韵母单元开始
-            const currentVowelUnit = selectedVowels[i];
-            for (let j = 0; j < currentVowelUnit.length; j++) {
-              const char = currentVowelUnit[j];
-              const charSpan = document.createElement("span");
-
-              // 只有当当前的韵母单元本身是 'i' 或 'u' 时，才标红
-              if (currentVowelUnit === "i" || currentVowelUnit === "u") {
-                charSpan.className = "selection-vowel-special";
-              } else {
-                charSpan.className = "selection-vowel";
-              }
-              charSpan.textContent = char;
-
-              vowelContainerSpan.appendChild(charSpan);
-            }
-          }
-
-          selectionDiv.appendChild(consonantSpan);
-          selectionDiv.appendChild(vowelContainerSpan);
-        }
-        // 如果没有选择，则不显示任何内容，也不显示提示
-      }
-
-      // 更新候选列表显示
-      function updateCandidateDisplay() {
-        const listDiv = document.getElementById("candidateList");
-
-        if (pinyinList.length === 0) {
-          listDiv.innerHTML =
-            '<div style="color: #999; font-style: italic; width: 100%; text-align: center;">还没有选择拼音</div>';
-          return;
-        }
-
-        listDiv.innerHTML = "";
-
-        // 现在 pinyinList 中的每一项都有 {fullPinyin, tone, vowelUnits}
-        pinyinList.forEach((item, index) => {
-          const candidateItem = document.createElement("div");
-          candidateItem.className = "candidate-item";
-
-          const pinyinText = item.fullPinyin;
-          let consonantPart = "";
-          let vowelUnits = item.vowelUnits;
-
-          // 找到最长匹配的声母
-          for (let len = 2; len >= 1; len--) {
-            // 先尝试匹配2位声母
-            const testConsonant = pinyinText.substring(0, len);
-            if (consonants.includes(testConsonant)) {
-              consonantPart = testConsonant;
-              break;
-            }
-          }
-
-          // 创建声母容器
-          const consonantSpan = document.createElement("span");
-          consonantSpan.className = "pinyin-consonant";
-          consonantSpan.textContent = consonantPart;
-
-          // 创建韵母容器
-          const vowelSpan = document.createElement("span");
-
-          // 处理韵母单元
-          vowelUnits.forEach((unit, unitIndex) => {
-            if (unitIndex === 0) {
-              // 第一个韵母单元，处理声调
-              const vowelFirstChar = unit.charAt(0);
-              const vowelFirstSpan = document.createElement("span");
-              vowelFirstSpan.className = "pinyin-vowel";
-              vowelFirstSpan.textContent = vowelFirstChar;
-
-              const toneSymbolSpan = document.createElement("span");
-              toneSymbolSpan.className = "pinyin-tone";
-              const toneSymbols = { 1: "ˉ", 2: "ˊ", 3: "ˇ", 4: "ˋ" };
-              toneSymbolSpan.textContent = toneSymbols[item.tone];
-              toneSymbolSpan.style.color = [
-                "#9E9E9E",
-                "#4CAF50",
-                "#FFC107",
-                "#F44336",
-              ][item.tone - 1];
-
-              vowelFirstSpan.appendChild(toneSymbolSpan);
-              vowelSpan.appendChild(vowelFirstSpan);
-
-              const restOfUnit = unit.substring(1);
-              for (let j = 0; j < restOfUnit.length; j++) {
-                const char = restOfUnit[j];
-                const charSpan = document.createElement("span");
-                // 如果当前单元是独立的 i 或 u，不适用此规则，仅处理非首单元
-                // 规则应用于整个单元，而非单个字符
-                if (unit === "i" || unit === "u") {
-                  // 这个不应该发生在第一个单元，因为声调在第一个字符上
-                  // 但为了完整性，如果第一个单元是 i/u，它会被标红
-                  charSpan.className = "pinyin-vowel-special";
-                } else {
-                  charSpan.className = "pinyin-vowel";
-                }
-                charSpan.textContent = char;
-                vowelSpan.appendChild(charSpan);
-              }
+            if (selectedVowels.length < 2) {
+                selectedVowels.push(vowel);
             } else {
-              // 后续韵母单元，无声调
-              for (let j = 0; j < unit.length; j++) {
-                const char = unit[j];
-                const charSpan = document.createElement("span");
-                // 只有当整个韵母单元是 'i' 或 'u' 时，才标红
-                if (unit === "i" || unit === "u") {
-                  charSpan.className = "pinyin-vowel-special";
-                } else {
-                  charSpan.className = "pinyin-vowel";
-                }
-                charSpan.textContent = char;
-                vowelSpan.appendChild(charSpan);
-              }
+                selectedVowels.pop();
+                selectedVowels.push(vowel);
             }
-          });
-
-          candidateItem.appendChild(consonantSpan);
-          candidateItem.appendChild(vowelSpan);
-          listDiv.appendChild(candidateItem);
-        });
-      }
-
-      // 重写 addToPinyinList 以存储结构化数据
-      function addToPinyinList() {
-        if (!selectedConsonant || selectedVowels.length === 0) return;
-        let fullPinyin = selectedConsonant + selectedVowels.join("");
-        // 存储结构化数据
-        pinyinList.push({
-          fullPinyin: fullPinyin,
-          tone: tone,
-          vowelUnits: [...selectedVowels], // 复制数组，防止外部修改
-        });
-        updateCandidateDisplay();
-
-        // 添加后清空选择状态和当前选择区
-        selectedConsonant = null;
-        selectedVowels = [];
-        tone = 1;
-        updateCurrentSelection();
-        document
-          .querySelectorAll(".phoneme-item.selected")
-          .forEach((el) => el.classList.remove("selected"));
-      }
-
-      function finishAndShowModal() {
-        if (pinyinList.length === 0) {
-          alert("请至少添加一个拼音！");
-          return;
         }
 
-        const modal = document.getElementById("myModal");
-        const listDiv = document.getElementById("finalPinyinList");
+        syncVowelUI();
+        updateCurrentSelection();
+    }
 
-        const toneSymbols = { 1: "ˉ", 2: "ˊ", 3: "ˇ", 4: "ˋ" };
-        // 构建展示列表，使用结构化数据
-        listDiv.innerHTML = pinyinList
-          .map((item) => {
+    function syncVowelUI() {
+        document.querySelectorAll('.vowel-item.selected').forEach(item => item.classList.remove('selected'));
+
+        selectedVowels.forEach(selectedVowel => {
+            const vowelRow = Array.from(document.querySelectorAll('.vowel-row')).find(row =>
+                row.querySelector('.vowel-options').contains(Array.from(row.querySelectorAll('.vowel-item')).find(item => item.textContent.includes(selectedVowel.charAt(0)) && item.textContent.includes(selectedVowel.substring(1))))
+            );
+
+            if (vowelRow) {
+                const vowelOptions = vowelRow.querySelectorAll('.vowel-item');
+                if (vowelOptions.length >= tone) {
+                    vowelOptions[tone - 1].classList.add('selected');
+                }
+            }
+        });
+    }
+
+
+    function updateCurrentSelection() {
+        const selectionDiv = document.getElementById('currentSelection');
+        selectionDiv.innerHTML = ''; // 清空内容
+
+        if (selectedVowels.length > 0) {
+            if (selectedConsonant) {
+                const consonantSpan = document.createElement('span');
+                consonantSpan.className = 'selection-consonant';
+                consonantSpan.textContent = selectedConsonant;
+                selectionDiv.appendChild(consonantSpan);
+            }
+
+            const vowelContainerSpan = document.createElement('span');
+            vowelContainerSpan.className = 'selection-vowel-container';
+            // 统一设置字体大小，确保所有字符高度一致
+            vowelContainerSpan.style.fontSize = '1.8em';
+
+            // 拼接所有韵母，并为每个字符分配颜色
+            let fullVowelText = selectedVowels.join('');
+            let cumulativeLength = 0;
+
+            for (let i = 0; i < fullVowelText.length; i++) {
+                const char = fullVowelText[i];
+
+                // 找出当前字符属于哪个韵母单元
+                let unitIndex = -1;
+                for (let j = 0; j < selectedVowels.length; j++) {
+                    cumulativeLength += selectedVowels[j].length;
+                    if (i < cumulativeLength) {
+                        unitIndex = j;
+                        break;
+                    }
+                }
+
+                // 根据单元索引决定颜色
+                const color = unitIndex === 0 ? FIRST_VOWEL_COLOR : NEXT_VOWEL_COLOR;
+
+                const charSpan = document.createElement('span');
+                charSpan.textContent = char;
+                charSpan.style.color = color;
+                charSpan.style.verticalAlign = 'baseline'; // 确保基线对齐
+                vowelContainerSpan.appendChild(charSpan);
+            }
+
+            // --- 修复点 1: 在vowelContainerSpan构建完成后，为其第一个字符添加声调 ---
+            // 为第一个字符添加声调符号（覆盖在第一个字符上）
+            if (fullVowelText.length > 0) {
+                const firstCharSpan = vowelContainerSpan.children[0]; // 获取刚添加进去的第一个字符span
+                if (firstCharSpan) { // 确认元素存在
+                    // 创建一个新的span来包裹第一个字符及其声调符号
+                    const firstCharWithToneContainer = document.createElement('span');
+                    firstCharWithToneContainer.style.position = 'relative';
+                    firstCharWithToneContainer.style.display = 'inline-block';
+                    firstCharWithToneContainer.style.color = firstCharSpan.style.color; // 继承原颜色
+
+                    // 将原字符文本放入新容器
+                    firstCharWithToneContainer.textContent = firstCharSpan.textContent;
+
+                    // 创建并设置声调符号
+                    const toneSpan = document.createElement('span');
+                    toneSpan.className = 'selection-tone';
+                    const toneSymbols = {'1': 'ˉ', '2': 'ˊ', '3': 'ˇ', '4': 'ˋ'};
+                    toneSpan.textContent = toneSymbols[tone];
+                    toneSpan.style.color = ['#9E9E9E', '#4CAF50', '#FFC107', '#F44336'][tone-1]; 
+                    
+                    firstCharWithToneContainer.appendChild(toneSpan);
+                    
+                    // 替换原来的第一个字符span
+                    vowelContainerSpan.replaceChild(firstCharWithToneContainer, firstCharSpan);
+                }
+            }
+            // --- 修复结束 ---
+
+            selectionDiv.appendChild(vowelContainerSpan);
+        }
+    }
+
+
+    function updateCandidateDisplay() {
+        const listDiv = document.getElementById('candidateList');
+
+        if (pinyinList.length === 0) {
+            listDiv.innerHTML = '<div style="color: #999; font-style: italic; width: 100%; text-align: center;">还没有选择拼音</div>';
+            return;
+        }
+
+        listDiv.innerHTML = '';
+
+        pinyinList.forEach((item, index) => {
+            const candidateItem = document.createElement('div');
+            candidateItem.className = 'candidate-item';
+
             const pinyinText = item.fullPinyin;
-            let consonantPart = "";
+            let consonantPart = '';
             let vowelUnits = item.vowelUnits;
 
-            // 找到最长匹配的声母
             for (let len = 2; len >= 1; len--) {
-              const testConsonant = pinyinText.substring(0, len);
-              if (consonants.includes(testConsonant)) {
-                consonantPart = testConsonant;
-                break;
-              }
+                 const testConsonant = pinyinText.substring(0, len);
+                 if (consonants.includes(testConsonant)) {
+                     consonantPart = testConsonant;
+                     break;
+                 }
             }
 
-            const symbol = toneSymbols[item.tone];
-            const symbolColor = ["#9E9E9E", "#4CAF50", "#FFC107", "#F44336"][
-              item.tone - 1
-            ];
+            if (consonantPart) {
+                const consonantSpan = document.createElement('span');
+                consonantSpan.className = 'pinyin-consonant';
+                consonantSpan.textContent = consonantPart;
+                candidateItem.appendChild(consonantSpan);
+            }
 
-            // 构建韵母HTML，区分独立的 i 和 u
-            let vowelHtml = "";
-            vowelUnits.forEach((unit, unitIndex) => {
-              if (unitIndex === 0) {
-                // 第一个韵母单元，处理声调
-                const vowelFirstChar = unit.charAt(0);
-                vowelHtml += `<span class="pinyin-vowel-modal">${vowelFirstChar}</span><span class="pinyin-tone-modal" style="color: ${symbolColor};">${symbol}</span>`;
-                const restOfUnit = unit.substring(1);
-                for (let j = 0; j < restOfUnit.length; j++) {
-                  const char = restOfUnit[j];
-                  // 第一个单元如果是 i 或 u，其首字母和其余字母都应是红色
-                  if (unit === "i" || unit === "u") {
-                    vowelHtml += `<span class="pinyin-vowel-modal-special">${char}</span>`;
-                  } else {
-                    vowelHtml += `<span class="pinyin-vowel-modal">${char}</span>`;
-                  }
-                }
-              } else {
-                // 后续韵母单元，无声调
-                for (let j = 0; j < unit.length; j++) {
-                  const char = unit[j];
-                  if (unit === "i" || unit === "u") {
-                    vowelHtml += `<span class="pinyin-vowel-modal-special">${char}</span>`;
-                  } else {
-                    vowelHtml += `<span class="pinyin-vowel-modal">${char}</span>`;
-                  }
-                }
-              }
-            });
+            const vowelSpan = document.createElement('span');
+            let fullVowelText = vowelUnits.join('');
+            let cumulativeLength = 0;
 
-            return `<div class="pinyin-word-container">
+            for (let i = 0; i < fullVowelText.length; i++) {
+                const char = fullVowelText[i];
+
+                let unitIndex = -1;
+                for (let j = 0; j < vowelUnits.length; j++) {
+                    cumulativeLength += vowelUnits[j].length;
+                    if (i < cumulativeLength) {
+                        unitIndex = j;
+                        break;
+                    }
+                }
+
+                const color = unitIndex === 0 ? FIRST_VOWEL_COLOR : NEXT_VOWEL_COLOR;
+
+                const charSpan = document.createElement('span');
+                charSpan.textContent = char;
+                charSpan.style.color = color;
+                vowelSpan.appendChild(charSpan);
+            }
+
+            // 修复点 2: 为第一个字符添加声调符号 (逻辑同修复点1)
+            if (fullVowelText.length > 0) {
+                const firstCharSpan = vowelSpan.children[0];
+                if (firstCharSpan) {
+                    const firstCharWithToneContainer = document.createElement('span');
+                    firstCharWithToneContainer.style.position = 'relative';
+                    firstCharWithToneContainer.style.display = 'inline-block';
+                    firstCharWithToneContainer.style.color = firstCharSpan.style.color;
+
+                    firstCharWithToneContainer.textContent = firstCharSpan.textContent;
+
+                    const toneSymbolSpan = document.createElement('span');
+                    toneSymbolSpan.className = 'pinyin-tone';
+                    const toneSymbols = {'1': 'ˉ', '2': 'ˊ', '3': 'ˇ', '4': 'ˋ'};
+                    toneSymbolSpan.textContent = toneSymbols[item.tone];
+                    toneSymbolSpan.style.color = ['#9E9E9E', '#4CAF50', '#FFC107', '#F44336'][item.tone-1]; 
+                    
+                    firstCharWithToneContainer.appendChild(toneSymbolSpan);
+                    
+                    vowelSpan.replaceChild(firstCharWithToneContainer, firstCharSpan);
+                }
+            }
+
+            candidateItem.appendChild(vowelSpan);
+            listDiv.appendChild(candidateItem);
+        });
+    }
+
+
+    function addToPinyinList() {
+      if (selectedVowels.length === 0) return;
+
+      let fullPinyin = (selectedConsonant || '') + selectedVowels.join('');
+      pinyinList.push({
+          fullPinyin: fullPinyin,
+          tone: tone,
+          vowelUnits: [...selectedVowels]
+      });
+      updateCandidateDisplay();
+      
+      // 清空选择
+      if (selectedConsonant) {
+          document.querySelectorAll('.consonant-item.selected').forEach(el => el.classList.remove('selected'));
+          selectedConsonant = null;
+      }
+      if (selectedVowels.length > 0) {
+          selectedVowels = [];
+          syncVowelUI();
+      }
+      tone = 1;
+      updateCurrentSelection();
+    }
+
+    function finishAndShowModal() {
+      if (pinyinList.length === 0) {
+        alert("请至少添加一个拼音！");
+        return;
+      }
+      
+      const modal = document.getElementById('myModal');
+      const listDiv = document.getElementById('finalPinyinList');
+      
+      const toneSymbols = {'1': 'ˉ', '2': 'ˊ', '3': 'ˇ', '4': 'ˋ'};
+      listDiv.innerHTML = pinyinList.map(item => {
+           const pinyinText = item.fullPinyin;
+           let consonantPart = '';
+           let vowelUnits = item.vowelUnits;
+
+           for (let len = 2; len >= 1; len--) {
+                 const testConsonant = pinyinText.substring(0, len);
+                 if (consonants.includes(testConsonant)) {
+                     consonantPart = testConsonant;
+                     break;
+                 }
+            }
+
+           const symbol = toneSymbols[item.tone];
+           const symbolColor = ['#9E9E9E', '#4CAF50', '#FFC107', '#F44336'][item.tone-1];
+           
+           let finalVowelHtml = '';
+           let fullVowelText = vowelUnits.join('');
+
+
+
+
+            if (vowelUnits.length > 1) {
+                finalVowelHtml = `
+                <span style="color:${FIRST_VOWEL_COLOR}">${vowelUnits[0]}</span>
+                <span style="color:${NEXT_VOWEL_COLOR}"><span style="position: relative; display: inline-block;">${vowelUnits[1][0]}<span class="pinyin-tone-modal" style="position: absolute; top: 0.25em; left: 50%; transform: translateX(-50%); color: ${symbolColor};">${symbol}</span></span>${vowelUnits[1].slice(1)}</span>    
+                `;
+            } else {
+                finalVowelHtml = ` <span style="color:${NEXT_VOWEL_COLOR}"><span style="position: relative; display: inline-block;">${vowelUnits[0][0]}<span class="pinyin-tone-modal" style="position: absolute; top: 0.1em; left: 50%; transform: translateX(-50%); color: ${symbolColor};">${symbol}</span></span>${vowelUnits[0].slice(1)}</span>`
+            }
+
+           
+           
+
+        //    if (fullVowelText.length > 0) {
+        //        const firstChar = fullVowelText[0];
+        //        const color0 = FIRST_VOWEL_COLOR;
+        //        // 构建第一个字符及其声调
+        //        finalVowelHtml += `<span style="color: ${color0}; position: relative; display: inline-block;">${firstChar}<span class="pinyin-tone-modal" style="position: absolute; top: 0.1em; left: 50%; transform: translateX(-50%); color: ${symbolColor};">${symbol}</span></span>`;
+               
+        //        // 添加其余字符
+        //        for (let i = 1; i < fullVowelText.length; i++) {
+        //            const char = fullVowelText[i];
+        //            let unitIndex = -1;
+        //            let cumulativeLength = 0;
+        //            for (let j = 0; j < vowelUnits.length; j++) {
+        //                cumulativeLength += vowelUnits[j].length;
+        //                if (i < cumulativeLength) {
+        //                    unitIndex = j;
+        //                    break;
+        //                }
+        //            }
+        //            const color = unitIndex === 0 ? FIRST_VOWEL_COLOR : NEXT_VOWEL_COLOR;
+        //            finalVowelHtml += `<span style="color: ${color};">${char}</span>`;
+        //        }
+        //    }
+
+
+
+
+
+
+
+           return `<div class="pinyin-word-container">
                <span class="pinyin-main">
-                   <span class="pinyin-consonant-modal">${consonantPart}</span>
+                   ${consonantPart ? `<span class="pinyin-consonant-modal">${consonantPart}</span>` : ''}
                    <span class="pinyin-vowel-container-modal">
-                       ${vowelHtml}
+                       ${finalVowelHtml}
                    </span>
                </span>
            </div>`;
-          })
-          .join("");
+      }).join('');
+      
+      modal.style.display = 'flex';
+    }
 
-        modal.style.display = "flex";
-      }
+    function closeModal() {
+      const modal = document.getElementById('myModal');
+      modal.style.display = 'none';
+      pinyinList = [];
+      updateCandidateDisplay();
+      updateCurrentSelection();
+      document.querySelectorAll('.phoneme-item.selected').forEach(el => el.classList.remove('selected'));
+    }
 
-      function closeModal() {
-        const modal = document.getElementById("myModal");
-        modal.style.display = "none";
-        pinyinList = [];
-        updateCandidateDisplay();
-        updateCurrentSelection(); // 关闭弹窗后也清空当前选择
-      }
+    // 初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      renderConsonants();
+      renderVowels();
+      updateCandidateDisplay();
+      updateCurrentSelection();
 
-      // 初始化
-      document.addEventListener("DOMContentLoaded", () => {
-        renderConsonants();
-        renderVowels();
-        updateCandidateDisplay();
-        updateCurrentSelection(); // 初始化当前选择区
-
-        document
-          .getElementById("addBtn")
-          .addEventListener("click", addToPinyinList);
-        document
-          .getElementById("finishBtn")
-          .addEventListener("click", finishAndShowModal);
-        document
-          .getElementById("closeModalBtn")
-          .addEventListener("click", closeModal);
-      });
-    </script>
-  </body>
+      document.getElementById('addBtn').addEventListener('click', addToPinyinList);
+      document.getElementById('finishBtn').addEventListener('click', finishAndShowModal);
+      document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    });
+  </script>
+</body>
 </html>
